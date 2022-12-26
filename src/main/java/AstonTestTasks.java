@@ -34,7 +34,7 @@ public class AstonTestTasks {
     //Составить алгоритм: на входе есть числовой массив, необходимо вывести элементы массива кратные 3
     public static void task3() {
         Random rand = new Random();
-        int arr[] = new int[5];
+        int[] arr = new int[5];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = rand.nextInt(100);
         }
