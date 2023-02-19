@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -39,14 +40,14 @@ public class Legacy {
 
         String string = "Say hi to aston trainee";
         stringSplit(string);
-        substring(string);
+        System.out.println(cutTheString(string,0,3,6,9,15,23));
 
         negativeValuesStream();
         x100minus100();
         surnamesAlpha();
     }
     //Нерекурсивное вычисление факториала
-    public static int getFactorial(int x) {
+    static int getFactorial(int x) {
         int result = 1;
         for (int i = 1; i <=x ; i++) {
             result = result * i;
@@ -54,7 +55,7 @@ public class Legacy {
         return result;
     }
     //Рекурсивное вычисление факториала
-    public static int getFactorialRecurse(int x) {
+    static int getFactorialRecurse(int x) {
         if (x<=1) {
             return 1;
         }else{
@@ -62,7 +63,7 @@ public class Legacy {
         }
     }
     //Вычисление числа Фибоначчи (случай 0,1)
-    public static void fibonacciNumbers(int x) {
+    static void fibonacciNumbers(int x) {
         int [] arr = new int[x];
         arr[0] = 0;
         arr[1] = 1;
@@ -74,7 +75,7 @@ public class Legacy {
         }
     }
     //Вычисление числа Фибоначчи (случай 0,0)
-    public static void fibonacciNumbersZeroCase(int x) {
+    static void fibonacciNumbersZeroCase(int x) {
         int [] arr = new int[x];
         arr[0] = 1;
         arr[1] = 1;
@@ -86,7 +87,7 @@ public class Legacy {
         }
     }
     //Вычисление числа Фибоначи через Stream (случай 0,1)
-    public static void fibonacciNumbersStream(int limitX) {
+    static void fibonacciNumbersStream(int limitX) {
         Stream.iterate(new int[]{0, 1}, arr -> new int[]{arr[1], arr[0] + arr[1]})
                 .limit(limitX)
                 .map(y->y[0])
@@ -106,19 +107,17 @@ public class Legacy {
             System.out.println(s);
         }
     }
-    //Разбиение строки через substring
-    static void substring(String str) {
-        String substr1 = str.substring(0,3);
-        String substr2 = str.substring(4,6);
-        String substr3 = str.substring(7,9);
-        String substr4 = str.substring(10,15);
-        String substr5 = str.substring(16);
-        System.out.println(substr1);
-        System.out.println(substr2);
-        System.out.println(substr3);
-        System.out.println(substr4);
-        System.out.println(substr5);
+    //Разбиение строки используя substring и varargs
+    static List<String> cutTheString(String word, Integer...indexes) {
+        int startIndex = indexes[0];
+        List<String>cutterList = new ArrayList<>();
+        for (int i = 1; i < indexes.length ; i++) {
+            cutterList.add(word.substring(startIndex, indexes[i]).trim());
+            startIndex=indexes[i];
+        }
+        return cutterList;
     }
+
     //Метод, который отрицательные числа делает положительными и возвращает коллекцию
     static void negativeValuesStream() {
         Stream<Integer>numStream = Stream.of(1, -5, 10, -15, 20, -25);
